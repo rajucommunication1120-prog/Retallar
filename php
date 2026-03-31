@@ -35,3 +35,28 @@ session_start();
 
     <button type="submit">Create</button>
 </form>
+<?php
+include "../db.php";
+$dist = mysqli_query($conn, "SELECT * FROM distributors");
+?>
+
+<h2>Create Retailer</h2>
+
+<form method="POST" action="create_retailer.php">
+
+    <input type="text" name="name" placeholder="Name" required><br><br>
+    <input type="text" name="mobile" placeholder="Mobile" required><br><br>
+    <input type="password" name="password" placeholder="Password" required><br><br>
+
+    <!-- Distributor select -->
+    <select name="distributor_id" required>
+        <option value="">Select Distributor</option>
+        <?php while($d = mysqli_fetch_assoc($dist)) { ?>
+            <option value="<?php echo $d['id']; ?>">
+                <?php echo $d['name']; ?>
+            </option>
+        <?php } ?>
+    </select><br><br>
+
+    <button type="submit">Create Retailer</button>
+</form>
